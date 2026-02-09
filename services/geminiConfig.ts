@@ -13,9 +13,8 @@ export const MODELS = {
   TEACHER: "gemini-3-flash-preview",    // Conversational with history
 } as const;
 
-// API Key Management
+// API Key Management — only uses localStorage (user must always enter key via modal)
 export function getApiKey(): string {
-  // Priority 1: localStorage (for user input via UI)
   const storedKey =
     typeof window !== "undefined"
       ? localStorage.getItem("GEMINI_API_KEY")
@@ -25,21 +24,8 @@ export function getApiKey(): string {
     return storedKey;
   }
 
-  // Priority 2: Environment variable
-  const meta = import.meta as any;
-  const envKey =
-    meta.env?.VITE_GEMINI_API_KEY ||
-    meta.env?.GEMINI_API_KEY ||
-    process.env.GEMINI_API_KEY ||
-    process.env.API_KEY;
-
-  if (envKey) {
-    return envKey;
-  }
-
   throw new Error(
-    "No API key found. Please set your Gemini API key in localStorage " +
-      "(key: 'GEMINI_API_KEY') or as an environment variable.",
+    "No API key found. Please enter your Gemini API key.",
   );
 }
 
