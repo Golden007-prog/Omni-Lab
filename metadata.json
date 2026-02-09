@@ -1,0 +1,8 @@
+{
+  "name": "Omni-Lab: The Empirical Tutor",
+  "description": "A multimodal learning platform combining real-time voice interaction with an autonomous 'Scientist' agent for verifying concepts through simulation.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ]
+}

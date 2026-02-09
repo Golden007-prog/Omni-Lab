@@ -1,0 +1,33 @@
+{
+  "name": "omni-lab:-the-empirical-tutor",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "homepage": "https://golden007-prog.github.io/Omni-Lab/",
+  "scripts": {
+    "dev": "vite",
+    "dev:server": "node server/realtimeServer.mjs",
+    "build": "vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "@google/genai": "^1.40.0",
+    "@google/generative-ai": "^0.24.1",
+    "file-saver": "^2.0.5",
+    "html2pdf.js": "^0.14.0",
+    "lucide-react": "^0.563.0",
+    "pptxgenjs": "^4.0.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "recharts": "^3.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "gh-pages": "^6.1.1",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  }
+}

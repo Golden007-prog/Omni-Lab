@@ -1,0 +1,122 @@
+/* Optional global styles (Tailwind is loaded via CDN in index.html). */
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* Better font rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ================================================================
+   MOBILE RESPONSIVE STYLES
+   ================================================================ */
+
+/* Safe area for bottom nav (notched phones) */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Slide-up animation for mobile drawers */
+.mobile-slide-up {
+  animation: slideUp 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Slide-down animation for mobile menu */
+.mobile-slide-down {
+  animation: slideDown 0.25s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Bottom nav styling */
+.mobile-bottom-nav {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(2, 6, 23, 0.92);
+}
+
+/* ================================================================
+   MOBILE TOUCH TARGETS
+   ================================================================ */
+
+@media (max-width: 767px) {
+  /* Larger tap targets for buttons */
+  button {
+    min-height: 44px;
+  }
+
+  /* Input fields */
+  input,
+  textarea,
+  select {
+    min-height: 48px;
+    font-size: 16px; /* prevents iOS zoom on focus */
+  }
+
+  /* Ensure chat input area is accessible above bottom nav */
+  .chat-input-mobile {
+    padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Independent scrolling for panels */
+  .mobile-scroll-independent {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /* Hide desktop-only scrollbars on mobile */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  /* Push floating voice panel above bottom nav */
+  .mobile-voice-panel {
+    bottom: calc(56px + env(safe-area-inset-bottom, 0px) + 8px) !important;
+    right: 8px !important;
+    left: 8px !important;
+    width: auto !important;
+  }
+
+  /* Push subtitles bar above bottom nav */
+  .mobile-subtitles-bar {
+    bottom: calc(56px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+/* ================================================================
+   TABLET ADJUSTMENTS  (768 – 1024)
+   ================================================================ */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Slightly narrower right panel on tablet */
+  .tablet-right-panel {
+    width: 320px;
+  }
+}
+
