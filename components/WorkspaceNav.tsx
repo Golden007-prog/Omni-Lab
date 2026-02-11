@@ -115,8 +115,6 @@ const WorkspaceNav: React.FC<WorkspaceNavProps> = ({ hasContent = false }) => {
         {navItems.map((item) => {
           const isActive = activeView === item.id;
           const hasItemContent = item.checkContent(ws);
-          
-          if (!hasItemContent && !isActive) return null; // Hide tabs that don't exist yet to keep UI clean
 
           return (
             <button
@@ -125,7 +123,9 @@ const WorkspaceNav: React.FC<WorkspaceNavProps> = ({ hasContent = false }) => {
               className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all whitespace-nowrap ${
                 isActive
                   ? "bg-purple-600 text-white"
-                  : "text-slate-400 hover:text-white hover:bg-slate-800"
+                  : hasItemContent
+                    ? "text-slate-400 hover:text-white hover:bg-slate-800"
+                    : "text-slate-600 hover:text-slate-400 hover:bg-slate-800/50"
               }`}
             >
               {item.icon}
