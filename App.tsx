@@ -33,7 +33,7 @@ import SlidePreview from './components/SlidePreview';
 import { speak, cancelSpeech } from './utils/audio';
 import { explainFlashcardInChat, explainFlashcardInVoice } from './services/explainRouter';
 import { registerPanelController, unregisterPanelController } from './services/panelBridge';
-import { Beaker, MessageSquare, Terminal, Sparkles, Presentation, Volume2, VolumeX, Radio, Menu, X } from 'lucide-react';
+import { Beaker, MessageSquare, Sparkles, Presentation, Volume2, VolumeX, Radio, Menu, X } from 'lucide-react';
 import MobileNav, { MobilePanel } from './components/MobileNav';
 import { useIsMobile } from './hooks/useIsMobile';
 
@@ -126,8 +126,8 @@ const VisualOverlayContainer: React.FC = () => {
 };
 
 const InteractionTabs: React.FC<{
-  activeTab: "chat" | "logs" | "studio";
-  setActiveTab: React.Dispatch<React.SetStateAction<"chat" | "logs" | "studio">>;
+  activeTab: "chat" | "studio";
+  setActiveTab: React.Dispatch<React.SetStateAction<"chat" | "studio">>;
 }> = ({ activeTab, setActiveTab }) => {
   const { tutorMode } = useTutor();
   const hideChat = tutorMode === "voice";
@@ -148,16 +148,12 @@ const InteractionTabs: React.FC<{
           <MessageSquare className="w-4 h-4" /> Chat
         </button>
       )}
-      <button onClick={() => setActiveTab('logs')}
-        className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 text-sm font-medium rounded-md transition-all whitespace-nowrap ${activeTab === 'logs' ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}>
-        <Terminal className="w-4 h-4" /> Agent
-      </button>
     </div>
   );
 };
 
 const TextTutorPanel: React.FC<{
-  activeTab: "chat" | "logs" | "studio";
+  activeTab: "chat" | "studio";
   apiKey: string;
   onSimulationRequest: (hypothesis: string) => Promise<string>;
   textChatRef: React.RefObject<TextChatHandle>;
@@ -190,7 +186,7 @@ const AppShell: React.FC<{ apiKey: string }> = ({ apiKey }) => {
   const ws = useWorkspace();
 
   // ── Local UI state (not shared data) ──────────────────────────────
-  const [activeTab, setActiveTab] = useState<'chat' | 'logs' | 'studio'>('chat');
+  const [activeTab, setActiveTab] = useState<'chat' | 'studio'>('chat');
   const textChatRef = useRef<TextChatHandle>(null);
 
   // Mobile
@@ -535,7 +531,7 @@ Generate an educational presentation about this document. Since I cannot read th
   // ==========================================================================
 
   const handleSimulationRequest = useCallback(async (hypothesis: string): Promise<string> => {
-    setActiveTab('logs');
+    // Simulation requested
     ws.setScientistState((prev) => ({
       ...prev,
       status: SimulationStatus.PLANNING,
@@ -848,9 +844,7 @@ Generate an educational presentation about this document. Since I cannot read th
               <StudioPanel onAction={handleStudioAction} isGenerating={ws.isGenerating} generatingType={ws.generatingType} />
             </div>
             <TextTutorPanel activeTab={activeTab} apiKey={apiKey} onSimulationRequest={handleSimulationRequest} textChatRef={textChatRef} />
-            <div className={`h-full ${activeTab === 'logs' ? 'block' : 'hidden'}`}>
-              <ThoughtLogger thoughts={ws.scientistState.thoughts} />
-            </div>
+
           </div>
         </div>
         )}
