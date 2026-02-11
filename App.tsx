@@ -459,7 +459,7 @@ File size: ${(source.size / 1024).toFixed(1)} KB
 Generate an educational presentation about this document. Since I cannot read the PDF directly, please create general educational slides about the topic suggested by the filename.`;
 
       const result = await runPresentationAgent(source.name, textContent);
-      ws.setLivePresentation({
+      const presentationData = {
         title: result.title || `Presentation: ${source.name}`,
         slides: result.slides.map((slide) => ({
           id: slide.id,
@@ -470,8 +470,11 @@ Generate an educational presentation about this document. Since I cannot read th
           answer: slide.answer,
           image_url: slide.image_url,
         })),
-      });
-      setView('live_presentation');
+      };
+      // Store in both for unified access — Slides tab reads ws.slides
+      ws.setLivePresentation(presentationData);
+      ws.setSlides({ slides: presentationData.slides, currentSlide: 0 });
+      setView('slides');
     } catch (error) {
       console.error('Failed to generate presentation:', error);
       alert('Failed to generate presentation. Please try again.');
@@ -724,7 +727,7 @@ Generate an educational presentation about this document. Since I cannot read th
                 <LivePresentationViewer
                   apiKey={apiKey}
                   data={{
-                    title: "Generated Slides",
+                    title: ws.livePresentation?.title || "Generated Slides",
                     slides: ws.slides.slides
                   }}
                   onClose={() => setView('idle')}
