@@ -209,6 +209,14 @@ const AppShell: React.FC<{ apiKey: string }> = ({ apiKey }) => {
     console.log("Active view:", activeView);
   }, [activeView]);
 
+  // ── Force layout recalculation on view switch ─────────────────────
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event("resize"));
+    }, 50);
+    return () => clearTimeout(timer);
+  }, [activeView]);
+
   // ==========================================================================
   // STUDIO ACTION HANDLER
   // ==========================================================================
@@ -705,14 +713,14 @@ Generate an educational presentation about this document. Since I cannot read th
           <div className="flex-1 relative min-h-0 w-full">
 
             {/* Idle / Visualizer */}
-            <div className={activeView === 'idle' ? 'absolute inset-0 z-0' : 'hidden'}>
+            <div className={activeView === 'idle' ? 'absolute inset-0' : 'hidden'}>
               <Visualizer result={ws.scientistState.result} status={ws.scientistState.status} vizStatus={ws.scientistState.visualizationStatus}
                 hasSources={ws.hasSources} onGeneratePresentation={handleGeneratePresentation} isGeneratingPresentation={ws.isGeneratingPresentation} />
             </div>
 
             {/* Slides — stays mounted */}
             {ws.slides && (
-              <div className={activeView === 'slides' ? 'absolute inset-0 z-0 flex flex-col' : 'hidden'}>
+              <div className={activeView === 'slides' ? 'absolute inset-0 flex flex-col' : 'hidden'}>
                 <LivePresentationViewer
                   apiKey={apiKey}
                   data={{
@@ -726,7 +734,7 @@ Generate an educational presentation about this document. Since I cannot read th
 
             {/* PPTX Preview — stays mounted */}
             {ws.pptxDeck && (
-              <div className={activeView === 'pptx_preview' ? 'absolute inset-0 z-0 flex flex-col' : 'hidden'}>
+              <div className={activeView === 'pptx_preview' ? 'absolute inset-0 flex flex-col' : 'hidden'}>
                 <SlidePreview deck={ws.pptxDeck} fileNameBase={ws.pptxFileNameBase}
                   onClose={() => setView('idle')}
                   onExportPptx={async () => { await generatePresentation(ws.pptxDeck!, { fileName: `${ws.pptxFileNameBase}-slides.pptx`, download: true }); }}
@@ -737,14 +745,14 @@ Generate an educational presentation about this document. Since I cannot read th
 
             {/* Live Presentation — stays mounted */}
             {ws.livePresentation && (
-              <div className={activeView === 'live_presentation' ? 'absolute inset-0 z-0 flex flex-col' : 'hidden'}>
+              <div className={activeView === 'live_presentation' ? 'absolute inset-0 flex flex-col' : 'hidden'}>
                 <LivePresentationViewer apiKey={apiKey} data={ws.livePresentation} onClose={() => setView('idle')} />
               </div>
             )}
 
             {/* Simulation image — stays mounted */}
             {ws.simulation?.imageUrl && (
-              <div className={activeView === 'simulation' ? 'absolute inset-0 z-0' : 'hidden'}>
+              <div className={activeView === 'simulation' ? 'absolute inset-0' : 'hidden'}>
                 <div className="h-full flex flex-col p-4">
                   <div className="flex-1 flex items-center justify-center bg-slate-800/50 rounded-xl border border-slate-700 p-4">
                     <img src={ws.simulation.imageUrl} alt="Simulation Result" className="max-w-full max-h-full object-contain rounded-lg" />
@@ -760,7 +768,7 @@ Generate an educational presentation about this document. Since I cannot read th
 
             {/* Flashcards — slide-in overlay */}
             {ws.flashcards && (
-              <div className={`absolute inset-0 z-10 bg-slate-900 transition-transform duration-300 ease-in-out ${activeView === 'flashcards' ? 'translate-x-0' : 'translate-x-full pointer-events-none'}`}>
+              <div className={activeView === 'flashcards' ? 'absolute inset-0' : 'hidden'}>
                 <FlashcardsViewer data={ws.flashcards}
                   isGenerating={ws.isGenerating && ws.generatingType === 'flashcards'}
                   onExplainInChat={(card) => { explainFlashcardInChat(card.front, card.back); setActiveMobilePanel('chat'); }}
@@ -772,7 +780,7 @@ Generate an educational presentation about this document. Since I cannot read th
 
             {/* Quiz — slide-in overlay */}
             {ws.quiz && (
-              <div className={`absolute inset-0 z-10 bg-slate-900 transition-transform duration-300 ease-in-out ${activeView === 'quiz' ? 'translate-x-0' : 'translate-x-full pointer-events-none'}`}>
+              <div className={activeView === 'quiz' ? 'absolute inset-0' : 'hidden'}>
                 <QuizViewer
                   data={ws.quiz}
                   isGenerating={ws.isGenerating && ws.generatingType === 'quiz'}
@@ -782,7 +790,7 @@ Generate an educational presentation about this document. Since I cannot read th
 
             {/* Infographic — slide-in overlay */}
             {ws.infographic && (
-              <div className={`absolute inset-0 z-10 bg-slate-900 transition-transform duration-300 ease-in-out ${activeView === 'infographic' ? 'translate-x-0' : 'translate-x-full pointer-events-none'}`}>
+              <div className={activeView === 'infographic' ? 'absolute inset-0' : 'hidden'}>
                 <InfographicViewer
                   data={ws.infographic}
                   isGenerating={ws.isGenerating && ws.generatingType === 'infographic'}
@@ -792,7 +800,7 @@ Generate an educational presentation about this document. Since I cannot read th
 
             {/* Video — slide-in overlay */}
             {ws.video && (
-              <div className={`absolute inset-0 z-10 bg-slate-900 transition-transform duration-300 ease-in-out ${(activeView === 'video' || activeView === 'audio') ? 'translate-x-0' : 'translate-x-full pointer-events-none'}`}>
+              <div className={(activeView === 'video' || activeView === 'audio') ? 'absolute inset-0' : 'hidden'}>
                 <VideoViewer
                   data={ws.video}
                   loading={ws.isGenerating && (ws.generatingType === 'video_overview' || ws.generatingType === 'audio_overview')}
@@ -804,7 +812,7 @@ Generate an educational presentation about this document. Since I cannot read th
 
             {/* Mindmap — slide-in overlay */}
             {ws.mindmap && (
-              <div className={`absolute inset-0 z-10 bg-slate-900 transition-transform duration-300 ease-in-out ${activeView === 'mindmap' ? 'translate-x-0' : 'translate-x-full pointer-events-none'}`}>
+              <div className={activeView === 'mindmap' ? 'absolute inset-0' : 'hidden'}>
                 <MindmapViewer
                   data={ws.mindmap}
                   isGenerating={ws.isGenerating && ws.generatingType === 'mind_map'}
@@ -814,7 +822,7 @@ Generate an educational presentation about this document. Since I cannot read th
 
             {/* DataTable — slide-in overlay */}
             {ws.dataTable && (
-              <div className={`absolute inset-0 z-10 bg-slate-900 transition-transform duration-300 ease-in-out ${activeView === 'data_table' ? 'translate-x-0' : 'translate-x-full pointer-events-none'}`}>
+              <div className={activeView === 'data_table' ? 'absolute inset-0' : 'hidden'}>
                 <DataTableViewer
                   data={ws.dataTable}
                   isGenerating={ws.isGenerating && ws.generatingType === 'data_table'}
@@ -824,7 +832,7 @@ Generate an educational presentation about this document. Since I cannot read th
 
             {/* Report — slide-in overlay */}
             {ws.report && (
-              <div className={`absolute inset-0 z-10 bg-slate-900 transition-transform duration-300 ease-in-out ${activeView === 'report' ? 'translate-x-0' : 'translate-x-full pointer-events-none'}`}>
+              <div className={activeView === 'report' ? 'absolute inset-0' : 'hidden'}>
                 <ReportViewer
                   data={ws.report}
                   isGenerating={ws.isGenerating && ws.generatingType === 'reports'}
