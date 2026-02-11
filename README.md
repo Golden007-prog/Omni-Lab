@@ -3,6 +3,7 @@
 # 🧪 Omni-Lab: The Empirical Tutor
 
 **A multimodal AI learning platform that transforms static content into interactive, verifiable, and visual lessons.**
+<img width="900" height="600" alt="Omni Lab" src="https://github.com/user-attachments/assets/a5b59b91-12d6-464b-845a-742c0a814cbb" />
 
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -10,7 +11,7 @@
 [![Gemini](https://img.shields.io/badge/Google_Gemini-API-4285F4?logo=google&logoColor=white)](https://ai.google.dev/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-[**🌐 Live Demo**](https://golden007-prog.github.io/Omni-Lab/) · [**📖 DevPost**](#) · [**🐛 Report Bug**](https://github.com/Golden007-prog/Omni-Lab/issues)
+[**🌐 Live Demo**](https://golden007-prog.github.io/Omni-Lab/) · [**📖 DevPost**](https://gemini3.devpost.com/) · [**🐛 Report Bug**](https://github.com/Golden007-prog/Omni-Lab/issues)
 
 </div>
 
