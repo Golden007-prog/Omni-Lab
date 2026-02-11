@@ -60,80 +60,71 @@ Omni-Lab is an autonomous educational workspace powered by **three specialized A
 
 ### ✨ Key Features
 
-<details>
-<summary><b>📄 Auto-Lecture Generation</b></summary>
-<br>
+#### 📄 Auto-Lecture Generation
+
 Upload any PDF and the system generates a full slide deck, then delivers a live voice-narrated presentation automatically.
 
 |             Click Play to Auto-Explain              |                 AI Teaching Live                 |
 | :-------------------------------------------------: | :----------------------------------------------: |
 | ![Click Play](pictures/Click_play_auto_explain.png) | ![Auto Explaining](pictures/Auto_explaining.png) |
 
-</details>
+---
 
-<details>
-<summary><b>🎤 Live Voice Tutor</b></summary>
-<br>
+#### 🎤 Live Voice Tutor
+
 Ask questions by voice — the AI Teacher listens, understands your slides' context, and responds naturally. Supports real-time interruptions with local VAD (Voice Activity Detection).
 
 |                Listening to Your Question                 |                Answered via Voice                |
 | :-------------------------------------------------------: | :----------------------------------------------: |
 | ![Listening](pictures/Listening_to_your_question.%20.png) | ![Voice Answer](pictures/Explained_in_voice.png) |
 
-</details>
+---
 
-<details>
-<summary><b>💬 Chat Explanations</b></summary>
-<br>
+#### 💬 Chat Explanations
+
 Prefer text? Ask in the chat panel and receive detailed, contextual explanations alongside your slides.
 
 |               Chat Explanation                |               Answer Detail                |
 | :-------------------------------------------: | :----------------------------------------: |
 | ![Chat Explain](pictures/Explain_in_chat.png) | ![Answer](pictures/Answer_of_Question.png) |
 
-</details>
+---
 
-<details>
-<summary><b>🃏 Flashcards & Quizzes</b></summary>
-<br>
+#### 🃏 Flashcards & Quizzes
+
 Auto-generate study materials from your content. Test yourself with interactive quizzes and review key concepts with flashcards.
 
 |               Generating Flashcards                |                 Flashcards View                  |              Quiz View               |            Submit & Grade             |
 | :------------------------------------------------: | :----------------------------------------------: | :----------------------------------: | :-----------------------------------: |
 | ![Generating](pictures/Generating_Flash_Cards.png) | ![Flashcards](pictures/Generated_flashcards.png) | ![Quiz](pictures/Generated_quiz.png) | ![Submit](pictures/Submit_answer.png) |
 
-</details>
+---
 
-<details>
-<summary><b>📊 Reports, Infographics & Data Tables</b></summary>
-<br>
+#### 📊 Reports, Infographics & Data Tables
+
 Generate comprehensive reports, visual infographics, and structured data tables from any topic.
 
 |                  Report                  |                     Infographic                      |                    Data Table                    |
 | :--------------------------------------: | :--------------------------------------------------: | :----------------------------------------------: |
 | ![Report](pictures/Generated_report.png) | ![Infographic](pictures/Generated_Info_Graphics.png) | ![Data Table](pictures/Generated_data_table.png) |
 
-</details>
+---
 
-<details>
-<summary><b>🎬 AI Video Generation</b></summary>
-<br>
+#### 🎬 AI Video Generation
+
 Ask "Make a video about this" and the system uses **Veo** to generate educational video clips on demand.
 
 |                      Video Structure                       |                 Generated Video                  |
 | :--------------------------------------------------------: | :----------------------------------------------: |
 | ![Video Structure](pictures/Video_structure_generated.png) | ![Generated Video](pictures/Generated_video.png) |
 
-</details>
+---
 
-<details>
-<summary><b>🗂️ Workspace Tabs</b></summary>
-<br>
+#### 🗂️ Workspace Tabs
+
 Switch between Slides, Flashcards, Quiz, Infographic, and Mind Map views without losing context.
 
 ![Workspace Tabs](pictures/change_tabs.%20.png)
-
-</details>
 
 ---
 
